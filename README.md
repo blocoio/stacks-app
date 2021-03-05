@@ -33,6 +33,8 @@ The Stacks Circles App provides a native Android experience to the [Stacks ecosy
 
 This app is open sourced. The project was made possible by the [Stacks Grants program](https://github.com/stacksgov/Stacks-Grants/issues/22) and is currently maintained by [Bloco](http://bloco.io/).
 
+Join our [Beta Testing](https://play.google.com/apps/testing/io.bloco.circles).
+
 ## Design
 
 The design follows both the Stacks and Material UI/UX guidelines and it is also
