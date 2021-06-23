@@ -28,7 +28,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <!-- Accepts URIs that begin with "http://www.example.com/gizmos” -->
+                <!-- Accepts URIs that begin with "app.blockstack.org” -->
                 <data
                     android:host="app.blockstack.org"
                     android:scheme="https" />

@@ -1,11 +1,11 @@
 package io.bloco.circles.domain
 
-import kotlinx.coroutines.flow.first
-import org.json.JSONObject
 import io.bloco.circles.data.AuthRequestModel
 import io.bloco.circles.data.IdentityModel
 import io.bloco.circles.data.IdentityModel.IdentityAppModel
 import io.bloco.circles.data.interfaces.IdentityRepository
+import kotlinx.coroutines.flow.first
+import org.json.JSONObject
 import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
@@ -25,9 +25,9 @@ class UpdateWallet
 
 
         if (appModel != null) {
-            Timber.i(appModel.json.toString() ?: "")
+            Timber.i(appModel.json.toString())
             appModel.json.put(IdentityAppModel.LAST_LOGIN, Date().time)
-            Timber.i(appModel.json.toString() ?: "")
+            Timber.i(appModel.json.toString())
         } else {
             val newModel = JSONObject().apply {
                 put(IdentityAppModel.NAME, appDetails?.name ?: authRequest.domainName)

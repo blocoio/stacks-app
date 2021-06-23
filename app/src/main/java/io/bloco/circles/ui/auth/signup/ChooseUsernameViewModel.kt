@@ -1,7 +1,7 @@
 package io.bloco.circles.ui.auth.signup
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.bloco.circles.data.AuthRequestsStore
 import io.bloco.circles.data.AuthResponseModel
 import io.bloco.circles.domain.*
@@ -13,9 +13,11 @@ import kotlinx.coroutines.channels.BroadcastChannel
 import kotlinx.coroutines.channels.sendBlocking
 import kotlinx.coroutines.flow.*
 import timber.log.Timber
+import javax.inject.Inject
 
+@HiltViewModel
 class ChooseUsernameViewModel
-@ViewModelInject constructor(
+@Inject constructor(
     generateAuthResponse: GenerateAuthResponse,
     checkUsernameStatus: CheckUsernameStatus,
     authRequestsStore: AuthRequestsStore,

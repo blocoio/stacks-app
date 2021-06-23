@@ -3,12 +3,12 @@ package io.bloco.circles.data
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import io.bloco.circles.data.interfaces.IdentityRepository
 import io.bloco.circles.data.interfaces.SecretKeyRepository
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 abstract class DataModule {
 
     @Binds

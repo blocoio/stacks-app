@@ -1,12 +1,6 @@
 package io.bloco.circles.ui.auth.identities
 
-import androidx.hilt.lifecycle.ViewModelInject
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.channels.BroadcastChannel
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
-import org.json.JSONObject
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.bloco.circles.data.AuthRequestModel.AppDetails
 import io.bloco.circles.data.AuthRequestsStore
 import io.bloco.circles.data.AuthResponseModel
@@ -15,9 +9,18 @@ import io.bloco.circles.data.interfaces.IdentityRepository
 import io.bloco.circles.domain.GenerateAuthResponse
 import io.bloco.circles.domain.GetAppDetails
 import io.bloco.circles.ui.BaseViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.channels.BroadcastChannel
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
+import org.json.JSONObject
+import timber.log.Timber
+import javax.inject.Inject
 
+@HiltViewModel
 class IdentitiesViewModel
-@ViewModelInject constructor(
+@Inject constructor(
     private val authRequestsStore: AuthRequestsStore,
     generateAuthResponse: GenerateAuthResponse,
     identityRepository: IdentityRepository,
@@ -68,10 +71,11 @@ class IdentitiesViewModel
                     )
                 )
             }
-            .catch {
+            .catch { e ->
                 loading.send(false)
                 errors.send(Unit)
                 emitAll(flow { IdentityModel(JSONObject("")) })
+                Timber.e(e)
             }
             .launchIn(ioScope)
     }

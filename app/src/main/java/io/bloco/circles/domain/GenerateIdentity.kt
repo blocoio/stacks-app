@@ -10,7 +10,7 @@ class GenerateIdentity
     fun generate(address: String, username: String?): IdentityModel {
         val json = JSONObject().apply {
             val unWrappedUsername = username?.let {
-                "$it.id.blockstack"
+                "$it.id.stx"
             } ?: address
 
             put(IdentityModel.USERNAME, unWrappedUsername)

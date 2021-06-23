@@ -1,16 +1,18 @@
 package io.bloco.circles.ui.secret
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.channels.BroadcastChannel
-import kotlinx.coroutines.flow.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.bloco.circles.data.interfaces.SecretKeyRepository
 import io.bloco.circles.domain.GenerateSecretKey
 import io.bloco.circles.ui.BaseViewModel
 import io.bloco.circles.ui.shared.ClipboardUtils
+import kotlinx.coroutines.channels.BroadcastChannel
+import kotlinx.coroutines.flow.*
+import javax.inject.Inject
 
+@HiltViewModel
 class SecretKeyViewModel
-@ViewModelInject constructor(
+@Inject constructor(
     secretKeyRepository: SecretKeyRepository,
     generateSecretKey: GenerateSecretKey,
     clipboardUtils: ClipboardUtils

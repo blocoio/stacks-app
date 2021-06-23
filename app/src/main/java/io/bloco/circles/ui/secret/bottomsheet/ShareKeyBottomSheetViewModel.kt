@@ -1,15 +1,17 @@
 package io.bloco.circles.ui.secret.bottomsheet
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.channels.BroadcastChannel
-import kotlinx.coroutines.flow.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.bloco.circles.data.interfaces.SecretKeyRepository
 import io.bloco.circles.ui.BaseViewModel
 import io.bloco.circles.ui.shared.ClipboardUtils
+import kotlinx.coroutines.channels.BroadcastChannel
+import kotlinx.coroutines.flow.*
+import javax.inject.Inject
 
+@HiltViewModel
 class ShareKeyBottomSheetViewModel
-@ViewModelInject constructor(
+@Inject constructor(
     secretKeyRepository: SecretKeyRepository,
     clipboardUtils: ClipboardUtils
 ) : BaseViewModel() {

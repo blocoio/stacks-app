@@ -15,15 +15,15 @@ import com.tfcporciuncula.flow.FlowSharedPreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import io.bloco.circles.data.AuthRequestsStore
 import org.blockstack.android.sdk.Blockstack
 import org.blockstack.android.sdk.model.Hub
-import io.bloco.circles.data.AuthRequestsStore
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 class CirclesModule {
 
     @Provides

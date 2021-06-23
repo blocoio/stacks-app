@@ -1,8 +1,6 @@
 package io.bloco.circles.ui.account
 
-import androidx.hilt.lifecycle.ViewModelInject
-import kotlinx.coroutines.channels.BroadcastChannel
-import kotlinx.coroutines.flow.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.bloco.circles.data.IdentityModel
 import io.bloco.circles.domain.GetUserAuthState
 import io.bloco.circles.domain.GetUserAuthState.UserAuthState.Authenticated
@@ -10,9 +8,13 @@ import io.bloco.circles.domain.GetUserAuthState.UserAuthState.Unauthenticated
 import io.bloco.circles.domain.Logout
 import io.bloco.circles.shared.foldOnEach
 import io.bloco.circles.ui.BaseViewModel
+import kotlinx.coroutines.channels.BroadcastChannel
+import kotlinx.coroutines.flow.*
+import javax.inject.Inject
 
+@HiltViewModel
 class AccountViewModel
-@ViewModelInject constructor(
+@Inject constructor(
     getUserAuthState: GetUserAuthState,
     logout: Logout
 ) : BaseViewModel() {

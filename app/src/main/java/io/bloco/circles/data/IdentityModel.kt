@@ -10,7 +10,7 @@ class IdentityModel(
     }
 
     val username: String? by lazy {
-        json.optString(USERNAME).replace(".id.blockstack", "")
+        json.optString(USERNAME).replace("\\.id.*".toRegex(), "")
     }
 
     val address: String? by lazy {

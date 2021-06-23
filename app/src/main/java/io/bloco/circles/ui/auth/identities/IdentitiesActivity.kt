@@ -8,17 +8,17 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
+import io.bloco.circles.R
+import io.bloco.circles.data.IdentityModel
+import io.bloco.circles.ui.BaseActivity
+import io.bloco.circles.ui.auth.signup.ChooseUsernameActivity
+import io.bloco.circles.ui.shared.IdentityRowView
 import kotlinx.android.synthetic.main.activity_identities.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import io.bloco.circles.R
-import io.bloco.circles.data.IdentityModel
-import io.bloco.circles.ui.BaseActivity
-import io.bloco.circles.ui.auth.signup.ChooseUsernameActivity
-import io.bloco.circles.ui.shared.IdentityRowView
 import reactivecircus.flowbinding.android.view.clicks
 
 @AndroidEntryPoint
@@ -106,7 +106,6 @@ class IdentitiesActivity : BaseActivity() {
     }
 
     companion object {
-        const val AUTH = 2
         const val AUTH_RESPONSE = "authResponse"
 
         fun getIntent(context: Context) = Intent(context, IdentitiesActivity::class.java)

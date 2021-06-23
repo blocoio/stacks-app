@@ -1,17 +1,19 @@
 package io.bloco.circles.ui.homepage
 
-import androidx.hilt.lifecycle.ViewModelInject
-import kotlinx.coroutines.channels.BroadcastChannel
-import kotlinx.coroutines.flow.*
-import org.blockstack.android.sdk.Blockstack
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.bloco.circles.domain.GetUserAuthState
 import io.bloco.circles.ui.BaseViewModel
 import io.bloco.circles.ui.homepage.HomePageViewModel.UserAuthState.Authenticated
 import io.bloco.circles.ui.homepage.HomePageViewModel.UserAuthState.Unauthenticated
+import kotlinx.coroutines.channels.BroadcastChannel
+import kotlinx.coroutines.flow.*
+import org.blockstack.android.sdk.Blockstack
 import timber.log.Timber
+import javax.inject.Inject
 
+@HiltViewModel
 class HomePageViewModel
-@ViewModelInject constructor(
+@Inject constructor(
     userAuthState: GetUserAuthState,
     blockstack: Blockstack
 ) : BaseViewModel() {

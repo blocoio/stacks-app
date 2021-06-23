@@ -1,22 +1,24 @@
 package io.bloco.circles.ui
 
-import androidx.hilt.lifecycle.ViewModelInject
 import com.google.gson.Gson
-import kotlinx.coroutines.channels.BroadcastChannel
-import kotlinx.coroutines.flow.*
-import me.uport.sdk.core.decodeBase64
-import me.uport.sdk.jwt.InvalidJWTException
-import me.uport.sdk.jwt.JWTEncodingException
-import me.uport.sdk.jwt.JWTUtils
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.bloco.circles.data.AuthRequestModel
 import io.bloco.circles.data.AuthRequestsStore
 import io.bloco.circles.domain.GetUserAuthState
 import io.bloco.circles.domain.GetUserAuthState.UserAuthState.Authenticated
 import io.bloco.circles.ui.SplashViewModel.Request.*
 import io.bloco.circles.ui.SplashViewModel.Request.Nothing
+import kotlinx.coroutines.channels.BroadcastChannel
+import kotlinx.coroutines.flow.*
+import me.uport.sdk.core.decodeBase64
+import me.uport.sdk.jwt.InvalidJWTException
+import me.uport.sdk.jwt.JWTEncodingException
+import me.uport.sdk.jwt.JWTUtils
+import javax.inject.Inject
 
+@HiltViewModel
 class SplashViewModel
-@ViewModelInject constructor(
+@Inject constructor(
     private val userAuthState: GetUserAuthState,
     private val gson: Gson,
     store: AuthRequestsStore,

@@ -1,11 +1,13 @@
 package io.bloco.circles.ui.shared
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.view.View
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
+@SuppressLint("ShowToast")
 class MessageLoader
 @Inject constructor(
     private val activity: Activity

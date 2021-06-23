@@ -1,13 +1,11 @@
 package io.bloco.circles.data.network.services
 
-import io.bloco.circles.data.network.models.RegistrarName
 import io.bloco.circles.data.network.models.RegistrarResponse
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.Headers
+import retrofit2.http.POST
 
 interface RegistrarService {
-
-    @GET("v1/names/{name}")
-    suspend fun lookupName(@Path("name") name: String): RegistrarName
 
     @Headers("Content-Type: application/json")
     @POST("/register")

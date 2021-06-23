@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-
-    <style name="InterButtonStyle" parent="android:Widget.Holo.Button">
-        <item name="android:fontFamily">@font/inter</item>
-    </style>
-
     <style name="TextAppearance.Circles.ToolbarTitle" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="android:textSize">20sp</item>
         <item name="fontFamily">@font/open_sauce_sans_medium</item>

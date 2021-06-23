@@ -7,18 +7,15 @@ import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
-import me.sianaki.flowretrofitadapter.FlowCallAdapterFactory
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
+import dagger.hilt.components.SingletonComponent
 import io.bloco.circles.BuildConfig
 import io.bloco.circles.R
 import io.bloco.circles.data.network.models.RegistrarName
 import io.bloco.circles.data.network.models.RegistrarNameStatusAdapter
-import io.bloco.circles.data.network.services.GaiaService
-import io.bloco.circles.data.network.services.GenericService
-import io.bloco.circles.data.network.services.HubService
-import io.bloco.circles.data.network.services.RegistrarService
+import io.bloco.circles.data.network.services.*
+import me.sianaki.flowretrofitadapter.FlowCallAdapterFactory
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
@@ -27,7 +24,7 @@ import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 class NetworkModule {
 
     @Provides
@@ -57,6 +54,11 @@ class NetworkModule {
     @Provides
     @RegistrarBaseUrl
     fun registrarBaseUrl(resources: Resources) = resources.getString(R.string.registrar_endpoint)
+
+    @Singleton
+    @Provides
+    @LookupBaseUrl
+    fun lookupBaseUrl(resources: Resources) = resources.getString(R.string.lookup_endpoint_stx)
 
     @Singleton
     @Provides
@@ -161,8 +163,22 @@ class NetworkModule {
         .build()
 
     @Provides
+    @Singleton
+    @LookupRetrofit
+    fun lookupRetrofit(
+        builder: Retrofit.Builder,
+        @LookupBaseUrl baseUrl: String
+    ): Retrofit = builder
+        .baseUrl(baseUrl)
+        .build()
+
+    @Provides
     fun provideRegistrarService(@RegistrarRetrofit retrofit: Retrofit): RegistrarService =
         retrofit.create(RegistrarService::class.java)
+
+    @Provides
+    fun provideLookupService(@LookupRetrofit retrofit: Retrofit): LookupService =
+        retrofit.create(LookupService::class.java)
 
     @Qualifier
     @Retention(AnnotationRetention.RUNTIME)
@@ -186,6 +202,14 @@ class NetworkModule {
 
     @Qualifier
     @Retention(AnnotationRetention.RUNTIME)
+    annotation class LookupBaseUrl
+
+    @Qualifier
+    @Retention(AnnotationRetention.RUNTIME)
     annotation class RegistrarRetrofit
+
+    @Qualifier
+    @Retention(AnnotationRetention.RUNTIME)
+    annotation class LookupRetrofit
 
 }

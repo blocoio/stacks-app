@@ -1,19 +1,22 @@
 package io.bloco.circles.ui
 
+import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import io.bloco.circles.R
 import io.bloco.circles.ui.auth.identities.IdentitiesActivity
 import io.bloco.circles.ui.auth.login.LoginActivity
 import io.bloco.circles.ui.homepage.HomepageActivity
 import io.bloco.circles.ui.secret.SecretKeyActivity
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SplashActivity : BaseActivity() {
@@ -22,9 +25,14 @@ class SplashActivity : BaseActivity() {
         ViewModelProvider(this).get(SplashViewModel::class.java)
     }
 
+    private lateinit var forActivityResult: ActivityResultLauncher<Intent>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+
+        forActivityResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {}
 
         GlobalScope.launch {
             delay(SPLASH_SCREEN_DELAY_MILLISECONDS)
@@ -49,7 +57,7 @@ class SplashActivity : BaseActivity() {
 
         viewModel
             .openIdentities()
-            .onEach { startActivityForResult(IdentitiesActivity.getIntent(this), IdentitiesActivity.AUTH) }
+            .onEach { forActivityResult.launch(IdentitiesActivity.getIntent(this)) }
             .launchIn(lifecycleScope)
 
         viewModel
@@ -59,9 +67,6 @@ class SplashActivity : BaseActivity() {
     }
 
     companion object {
-        const val RESULT_OK = 0
-        const val RESULT_ERROR = -1
-
         const val SPLASH_SCREEN_DELAY_MILLISECONDS = 1 * 1000L
     }
 

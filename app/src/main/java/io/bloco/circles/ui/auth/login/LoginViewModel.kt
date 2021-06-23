@@ -1,16 +1,18 @@
 package io.bloco.circles.ui.auth.login
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.channels.BroadcastChannel
-import kotlinx.coroutines.flow.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.bloco.circles.data.AuthRequestsStore
 import io.bloco.circles.domain.Login
 import io.bloco.circles.shared.foldOnEach
 import io.bloco.circles.ui.BaseViewModel
+import kotlinx.coroutines.channels.BroadcastChannel
+import kotlinx.coroutines.flow.*
+import javax.inject.Inject
 
+@HiltViewModel
 class LoginViewModel
-@ViewModelInject constructor(
+@Inject constructor(
     authRequestsStore: AuthRequestsStore,
     login: Login
 ) : BaseViewModel() {
